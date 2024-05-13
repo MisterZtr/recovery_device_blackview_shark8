@@ -90,7 +90,7 @@ service vendor.keymint-trustkernel /vendor/bin/hw/android.hardware.security.keym
     class early_hal
     interface android.hardware.keymaster@4.0::IKeymasterDevice default
     interface android.hardware.keymaster@4.1::IKeymasterDevice default
-    user nobody
+    user root
     seclabel u:r:recovery:s0
 
 service touchfeature-hal-1-0 /vendor/bin/hw/vendor.xiaomi.hardware.touchfeature@1.0-service
@@ -146,31 +146,31 @@ on property:sys.usb.ffs.ready=1
     start mountfix
 
 on property:hwservicemanager.ready=true
-    start teei_daemon
+    start teed
     start gatekeeper-1-0
     start vendor.keymint-trustkernel
     start keymaster_attestation-1-1
     
 on property:vendor.sys.listener.registered=true
-    start teei_daemon
+    start teed
     start gatekeeper-1-0
     start keymint-beanpod
     start keymaster
    
 on property:ro.crypto.state=unsupported
-    stop teei_daemon
+    stop teed
     stop keymint-beanpod
     stop gatekeeper-1-0
     stop vendor.keymint-trustkernel
 
 on property:ro.crypto.state=unencrypted
-    stop teei_daemon
+    stop teed
     stop keymint-beanpod
     stop gatekeeper-1-0
     stop keymaster
     
 on property:twrp.all.users.decrypted=true
-    stop teei_daemon
+    stop teed
     stop keymint-beanpod
     stop gatekeeper-1-0
     stop vendor.keymint-trustkernel

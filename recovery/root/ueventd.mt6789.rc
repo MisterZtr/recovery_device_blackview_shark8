@@ -189,3 +189,8 @@
 
 #MTK In-House TEE
 /dev/ttyACM0              0660   radio      radio
+#TrustKernel
+/dev/tkcoredrv            0660   root       system
+/dev/tkcore_fp            0660   root       system
+/dev/rpmb0                0660   root       system
+/dev/mmcblk0rpmb          0660   root       system
