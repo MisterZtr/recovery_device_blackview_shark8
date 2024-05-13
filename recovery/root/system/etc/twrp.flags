@@ -14,6 +14,9 @@
 /dtbo               emmc   /dev/block/by-name/dtbo                         flags=display="Dtbo";slotselect;backup=1
 /vbmeta             emmc   /dev/block/by-name/vbmeta                       flags=display="VBMeta";slotselect;flashimg=1
 
+/protect_f          ext4      /dev/block/by-name/protect1                  flags=display="Protect_f";backup=1
+/protect_s          ext4      /dev/block/by-name/protect2                  flags=display="Protect_s";backup=1
+
 #IMEI
 /nvram_image        emmc   /dev/block/by-name/nvram                        flags=backup;display="IMEI"
 /nvdata             ext4   /dev/block/by-name/nvdata                       flags=backup;subpartitionof=/nvram_image

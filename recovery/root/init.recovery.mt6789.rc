@@ -1,4 +1,5 @@
-import /init.microtrust.rc
+#import /init.microtrust.rc
+import /trustkernel.rc
 
 on init
     # Create a more standard /dev/block layout for our scripts
@@ -85,6 +86,13 @@ on boot
     chown system system /sys/class/touch/tp_dev/fod_status
     chmod 0664 /sys/class/touch/tp_dev/fod_status
 
+service vendor.keymint-trustkernel /vendor/bin/hw/android.hardware.security.keymint-service.trustkernel
+    class early_hal
+    interface android.hardware.keymaster@4.0::IKeymasterDevice default
+    interface android.hardware.keymaster@4.1::IKeymasterDevice default
+    user nobody
+    seclabel u:r:recovery:s0
+
 service touchfeature-hal-1-0 /vendor/bin/hw/vendor.xiaomi.hardware.touchfeature@1.0-service
     class main
     user root
@@ -129,15 +137,19 @@ service mountfix /sbin/sh /system/bin/mount.sh
     oneshot
     disabled
     seclabel u:r:recovery:s0
-    
+
+on property:crypto.ready=1
+    start keystore2
+    start vendor.keymint-trustkernel
+
 on property:sys.usb.ffs.ready=1
     start mountfix
 
 on property:hwservicemanager.ready=true
     start teei_daemon
     start gatekeeper-1-0
-    start keymint-beanpod
-    start keymaster
+    start vendor.keymint-trustkernel
+    start keymaster_attestation-1-1
     
 on property:vendor.sys.listener.registered=true
     start teei_daemon
@@ -149,7 +161,7 @@ on property:ro.crypto.state=unsupported
     stop teei_daemon
     stop keymint-beanpod
     stop gatekeeper-1-0
-    stop keymaster-4-1
+    stop vendor.keymint-trustkernel
 
 on property:ro.crypto.state=unencrypted
     stop teei_daemon
@@ -161,7 +173,8 @@ on property:twrp.all.users.decrypted=true
     stop teei_daemon
     stop keymint-beanpod
     stop gatekeeper-1-0
-    stop keymaster
+    stop vendor.keymint-trustkernel
+    stop keymaster_attestation-1-1
 
 on boot
     start health-hal-2-1
