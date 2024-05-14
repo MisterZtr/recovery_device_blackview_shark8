@@ -2,6 +2,9 @@
 import /trustkernel.rc
 
 on init
+
+    mount cgroup none /acct cpuacct
+    mkdir /acct/uid
     # Create a more standard /dev/block layout for our scripts
     symlink /dev/block/platform/bootdevice /dev/block/bootdevice
     mkdir /persist 0700 root root
@@ -54,8 +57,8 @@ on post-fs
     on property:persist.vendor.mtk.pl_lnk=1
     symlink /dev/block/mapper/pl_a /dev/block/by-name/preloader_raw_a
     symlink /dev/block/mapper/pl_b /dev/block/by-name/preloader_raw_b
-    symlink /dev/block/mapper/pl_a /dev/block/platform/bootdevice/by-name/preloader_raw_a
-    symlink /dev/block/mapper/pl_b /dev/block/platform/bootdevice/by-name/preloader_raw_b
+    #symlink /dev/block/mapper/pl_a /dev/block/platform/bootdevice/by-name/preloader_raw_a
+    #symlink /dev/block/mapper/pl_b /dev/block/platform/bootdevice/by-name/preloader_raw_b
 
 # FSTAB_RAW2(lk2,bootloader2) of fstab.in.emmc, but without bootloader2 mount point
     symlink /dev/block/by-name/lk1 /dev/block/by-name/bootloader1
@@ -86,13 +89,6 @@ on boot
     chown system system /sys/class/touch/tp_dev/fod_status
     chmod 0664 /sys/class/touch/tp_dev/fod_status
 
-service vendor.keymint-trustkernel /vendor/bin/hw/android.hardware.security.keymint-service.trustkernel
-    class early_hal
-    interface android.hardware.keymaster@4.0::IKeymasterDevice default
-    interface android.hardware.keymaster@4.1::IKeymasterDevice default
-    user root
-    seclabel u:r:recovery:s0
-
 service touchfeature-hal-1-0 /vendor/bin/hw/vendor.xiaomi.hardware.touchfeature@1.0-service
     class main
     user root
@@ -107,6 +103,22 @@ service mtk.plpath.utils.link /system/bin/mtk_plpath_utils
     group root system
     disabled
     oneshot
+    seclabel u:r:recovery:s0
+
+    service vendor.keymint-trustkernel /vendor/bin/hw/android.hardware.security.keymint-service.trustkernel
+    interface android.hardware.keymaster@4.0::IKeymasterDevice default
+    interface android.hardware.keymaster@4.1::IKeymasterDevice default
+    user root
+    group root
+    seclabel u:r:recovery:s0
+
+ service keymaster_attestation-1-1 /vendor/bin/hw/vendor.mediatek.hardware.keymaster_attestation@1.1-service
+    interface vendor.mediatek.hardware.keymaster_attestation@1.0::IKeymasterDevice default
+    interface vendor.mediatek.hardware.keymaster_attestation@1.1::IKeymasterDevice default
+    class hal
+    user root
+    group root
+    disabled
     seclabel u:r:recovery:s0
 
 service keymint-beanpod /vendor/bin/hw/android.hardware.security.keymint@1.0-service.beanpod
@@ -146,31 +158,32 @@ on property:sys.usb.ffs.ready=1
     start mountfix
 
 on property:hwservicemanager.ready=true
-    start teed
+    start keymaster
     start gatekeeper-1-0
     start vendor.keymint-trustkernel
     start keymaster_attestation-1-1
     
 on property:vendor.sys.listener.registered=true
-    start teed
+    start keymaster
     start gatekeeper-1-0
     start keymint-beanpod
-    start keymaster
+    start vendor.keymint-trustkernel
+    start keymaster_attestation-1-1
    
 on property:ro.crypto.state=unsupported
-    stop teed
+
     stop keymint-beanpod
     stop gatekeeper-1-0
     stop vendor.keymint-trustkernel
 
 on property:ro.crypto.state=unencrypted
-    stop teed
+
     stop keymint-beanpod
     stop gatekeeper-1-0
     stop keymaster
     
 on property:twrp.all.users.decrypted=true
-    stop teed
+
     stop keymint-beanpod
     stop gatekeeper-1-0
     stop vendor.keymint-trustkernel

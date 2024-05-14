@@ -14,8 +14,6 @@
 /dtbo               emmc   /dev/block/by-name/dtbo                         flags=display="Dtbo";slotselect;backup=1
 /vbmeta             emmc   /dev/block/by-name/vbmeta                       flags=display="VBMeta";slotselect;flashimg=1
 
-/protect_f          ext4      /dev/block/by-name/protect1                  flags=display="Protect_f";backup=1
-/protect_s          ext4      /dev/block/by-name/protect2                  flags=display="Protect_s";backup=1
 
 #IMEI
 /nvram_image        emmc   /dev/block/by-name/nvram                        flags=backup;display="IMEI"
@@ -30,6 +28,7 @@
 /persist            ext4   /dev/block/by-name/persist                      flags=display="Persist"
 /proinfo            auto   /dev/block/by-name/proinfo                      flags=display="Proinfo"
 /seccfg             auto   /dev/block/by-name/seccfg
+
 
 # Images
 /system_image       emmc   /dev/block/mapper/system                        flags=backup=1;display="System Image";slotselect;flashimg=1

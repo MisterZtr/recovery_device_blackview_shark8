@@ -52,3 +52,5 @@ odm_dlkm                                /odm_dlkm              ext4   ro,barrier
 /dev/block/by-name/dtbo                 /dtbo                  emmc   defaults                defaults
 /dev/block/by-name/otp                  /otp                   emmc   defaults                defaults
 /dev/block/by-name/vbmeta               /vbmeta                emmc   defaults                defaults
+/dev/block/by-name/protect1             /mnt/vendor/protect_f  ext4   noatime,nosuid,nodev,noauto_da_alloc,commit=1,nodelalloc wait,check,formattable
+/dev/block/by-name/protect2             /mnt/vendor/protect_s  ext4   noatime,nosuid,nodev,noauto_da_alloc,commit=1,nodelalloc wait,check,formattable

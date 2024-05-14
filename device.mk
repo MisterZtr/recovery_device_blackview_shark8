@@ -98,3 +98,4 @@ PRODUCT_COPY_FILES += \
 # Keystore
 PRODUCT_PACKAGES += \
     android.system.keystore2
+
