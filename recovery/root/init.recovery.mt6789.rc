@@ -78,21 +78,7 @@ on property:vendor.mtk.boot1_linkb=1
 
 on property:vendor.mtk.boot1_linkc=1
     symlink /dev/block/sdc /dev/block/mmcblk0boot1
-    
-on boot
-    chown system system /dev/xiaomi-touch
-    chmod 0664 /dev/xiaomi-touch
-    chown system system /sys/class/touch/tp_dev/fod_status
-    chmod 0664 /sys/class/touch/tp_dev/fod_status
 
-service touchfeature-hal-1-0 /vendor/bin/hw/vendor.xiaomi.hardware.touchfeature@1.0-service
-    class main
-    user root
-    group root
-    onrestart restart touchfeature-hal-1-0
-    seclabel u:r:recovery:s0
-    
-    
 service mtk.plpath.utils.link /system/bin/mtk_plpath_utils
     class main
     user root
