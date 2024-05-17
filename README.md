@@ -26,7 +26,7 @@ Camera  | 64 MP (Samsung® ISOCELL GW3) and 13 MP (Samsung® ISOCELL 3L6)
 Works:
 
 - [X] ADB
-- [ ] Decryption
+- [ ] Trust Kernel Decryption
 - [X] Display
 - [X] Fasbootd
 - [X] Flashing
