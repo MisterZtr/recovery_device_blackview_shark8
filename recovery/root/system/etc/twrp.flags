@@ -19,14 +19,17 @@
 /nvdata             ext4   /dev/block/by-name/nvdata                       flags=backup;subpartitionof=/nvram_image
 /nvcfg              ext4   /dev/block/by-name/nvcfg                        flags=backup;subpartitionof=/nvram_image
 /persist_image      emmc   /dev/block/by-name/persist                      flags=backup;subpartitionof=/nvram_image
-/protect1_image     emmc   /dev/block/by-name/protect1                     flags=backup;subpartitionof=/nvram_image
-/protect2_image     emmc   /dev/block/by-name/protect2                     flags=backup;subpartitionof=/nvram_image
+/protectf_image     emmc   /dev/block/by-name/protect1                     flags=backup;subpartitionof=/nvram_image
+/protects_image     emmc   /dev/block/by-name/protect2                     flags=backup;subpartitionof=/nvram_image
 /proinfo_image      emmc   /dev/block/by-name/proinfo                      flags=backup;subpartitionof=/nvram_image
 /seccfg_image       emmc   /dev/block/by-name/seccfg                       flags=backup;subpartitionof=/nvram_image
 /nvram              auto   /dev/block/by-name/nvram                        flags=display="Nvram"
 /persist            ext4   /dev/block/by-name/persist                      flags=display="Persist"
 /proinfo            auto   /dev/block/by-name/proinfo                      flags=display="Proinfo"
 /seccfg             auto   /dev/block/by-name/seccfg
+
+/protect_f          ext4   /dev/block/by-name/protect1                     flags=display="Protect_f";backup=1
+/protect_s          ext4   /dev/block/by-name/protect2                     flags=display="Protect_s";backup=1
 
 # Images
 /system_image       emmc   /dev/block/mapper/system                        flags=backup=1;display="System Image";slotselect;flashimg=1
