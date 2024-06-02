@@ -1012,9 +1012,3 @@ alias of:N*T*Cmediatek,mt6855-mdpm mtk_mdpm
 alias of:N*T*Cmediatek,mt6855-mdpmC* mtk_mdpm
 alias of:N*T*Cmediatek,mt6789-mdpm mtk_mdpm
 alias of:N*T*Cmediatek,mt6789-mdpmC* mtk_mdpm
-alias of:N*T*Cfocaltech,fts focaltech_tp
-alias of:N*T*Cfocaltech,ftsC* focaltech_tp
-alias of:N*T*Cmediatek,flashlight_core flashlight
-alias of:N*T*Cmediatek,flashlight_coreC* flashlight
-alias of:N*T*Cmediatek,mtk-bp-thl mtk_bp_thl
-alias of:N*T*Cmediatek,mtk-bp-thlC* mtk_bp_thl
