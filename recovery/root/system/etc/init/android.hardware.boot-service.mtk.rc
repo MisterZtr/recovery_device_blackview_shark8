@@ -1,0 +1,8 @@
+service boot-mtk /system/bin/android.hardware.boot-service.mtk
+    interface android.hardware.boot@1.0::IBootControl default
+    interface android.hardware.boot@1.1::IBootControl default
+    interface android.hardware.boot@1.2::IBootControl default
+    class early_hal
+    user root
+    group root
+    seclabel u:r:recovery:s0

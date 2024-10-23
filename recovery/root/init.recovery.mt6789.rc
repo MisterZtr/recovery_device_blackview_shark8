@@ -46,7 +46,7 @@ on fs
     write /proc/bootprof "INIT:Mount_END"
 
 on post-fs
-   start boot-hal-1-2
+    start boot-mtk
     exec u:r:update_engine:s0 root root -- /system/bin/mtk_plpath_utils
     start mtk.plpath.utils.link
 
