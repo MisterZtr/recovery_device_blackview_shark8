@@ -1,5 +1,6 @@
 import /trustonic.rc
 import /tee.rc
+import /vold.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug

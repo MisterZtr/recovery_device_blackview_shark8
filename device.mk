@@ -105,3 +105,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_EXTRA_RECOVERY_KEYS += \
     $(DEVICE_PATH)/security/otacert
 
+# Vold
+PRODUCT_PACKAGES += \
+    vold
+
