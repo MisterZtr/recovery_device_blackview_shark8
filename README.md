@@ -1,4 +1,4 @@
-#  Recovery tree of Blackview SHARK 8
+#  Recovery tree of realme SHARK 8
 
 It was announced & released on November 2023.
 
@@ -18,7 +18,7 @@ Camera  | 64 MP (Samsung® ISOCELL GW3) and 13 MP (Samsung® ISOCELL 3L6)
 
 ## Device picture
 
-![1](https://github.com/MisterZtr/recovery_device_blackview_shark8/assets/87061244/df8851e4-afea-4709-a89c-5b044ff9bd07)
+![1](https://github.com/MisterZtr/recovery_device_realme_RMX3630/assets/87061244/df8851e4-afea-4709-a89c-5b044ff9bd07)
 
 
 ## Features
@@ -41,12 +41,12 @@ Works:
 # Building
 ```bash
 source build/envsetup.sh
-lunch twrp_shark8-eng
+lunch twrp_RMX3630-eng
 mka vendorbootimage
 ```
 
 ## To use it:
 
 ```
-fastboot flash vendor_boot out/target/product/shark8/vendor_boot.img
+fastboot flash vendor_boot out/target/product/RMX3630/vendor_boot.img
 ```

@@ -1,11 +1,16 @@
-import /init.microtrust.rc
+import /trustonic.rc
+import /tee.rc
+
+on early-init
+    mount debugfs debugfs /sys/kernel/debug
+    chmod 0755 /sys/kernel/debug
 
 on init
     # Create a more standard /dev/block layout for our scripts
     symlink /dev/block/platform/bootdevice /dev/block/bootdevice
-    mkdir /persist 0700 root root
-    mount ext4 /dev/block/by-name/persist /persist
-    mkdir /persist/OFRP
+    mkdir /mnt/vendor/persist 0700 root root
+    mount ext4 /dev/block/by-name/persist /mnt/vendor/persist
+    mkdir /mnt/vendor/persist/OFRP
     export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw
     setprop sys.usb.configfs 1
     setprop sys.usb.controller "musb-hdrc"
@@ -32,18 +37,6 @@ on init
 on early-fs
     # Once metadata has been mounted, we'll need vold to deal with userdata checkpointing
     start vold
-
-on fs
-    write /proc/bootprof "INIT:fs"
-    install_keyring
-
-# mount fstab
-    write /proc/bootprof "INIT:Mount_START"
-    write /sys/kernel/tracing/trace_marker "B|1|Mount"
-    mount_all --early
-    exec /system/bin/tune2fs -O has_journal -u 10010 -r 4096 /dev/block/by-name/userdata
-    write /sys/kernel/tracing/trace_marker "E"
-    write /proc/bootprof "INIT:Mount_END"
 
 on post-fs
     start boot-mtk
@@ -87,13 +80,11 @@ service mtk.plpath.utils.link /system/bin/mtk_plpath_utils
     oneshot
     seclabel u:r:recovery:s0
 
-service keymint-beanpod /vendor/bin/hw/android.hardware.security.keymint@1.0-service.beanpod
-    interface android.hardware.keymaster@4.0::IKeymasterDevice default
-    interface android.hardware.keymaster@4.1::IKeymasterDevice default
-    user root
-    group root drmrpc
-    disabled
-    oneshot
+service soter_hal /vendor/bin/hw/vendor.trustonic.soter@1.0-service
+    class late_start
+    user system
+    group system
+    interface aidl vendor.trustonic.hardware.soter.ITrustonicSoter/default
     seclabel u:r:recovery:s0
 
 service gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-service
@@ -116,38 +107,43 @@ service mountfix /sbin/sh /system/bin/mount.sh
     disabled
     seclabel u:r:recovery:s0
     
-on property:sys.usb.ffs.ready=1
-    start mountfix
+service vendor.keymint-trustonic /vendor/bin/hw/android.hardware.security.keymint-service.trustonic
+    class early_hal
+    user nobody
+    seclabel u:r:recovery:s0
+
+on property:crypto.ready=1
+    start vendor.keymint-trustonic
 
 on property:hwservicemanager.ready=true
-    start teei_daemon
+    start mobicore
     start gatekeeper-1-0
-    start keymint-beanpod
-    start keymaster
-    
-on property:vendor.sys.listener.registered=true
-    start teei_daemon
-    start gatekeeper-1-0
-    start keymint-beanpod
-    start keymaster
-   
+    start vendor.keymint-trustonic
+
 on property:ro.crypto.state=unsupported
-    stop teei_daemon
-    stop keymint-beanpod
+    stop mobicore
     stop gatekeeper-1-0
-    stop keymaster-4-1
+    stop vendor.keymint-trustonic
 
 on property:ro.crypto.state=unencrypted
-    stop teei_daemon
-    stop keymint-beanpod
+    stop mobicore
     stop gatekeeper-1-0
-    stop keymaster
-    
-on property:twrp.all.users.decrypted=true
-    stop teei_daemon
-    stop keymint-beanpod
+    stop vendor.keymint-trustonic
+
+on property:twrp.decrypt.done=true
+    stop mobicore
     stop gatekeeper-1-0
-    stop keymaster
+    stop vendor.keymint-trustonic
+
+on property:crypto.ready=0
+    stop mobicore
+    stop gatekeeper-1-0
+    stop vendor.keymint-trustonic
+
+on post-fs-data
+    mkdir /data/vendor_de 0770 system system
+    mkdir /data/vendor_de/0 0770 system system
+    mkdir /data/vendor_de/0/cryptoeng 0770 system system
 
 on boot
     start health-hal-2-1
