@@ -164,6 +164,7 @@ on boot
     start health-hal-2-1
     start vendor.vibrator-default
     setprop sys.usb.config adb
+    write /sys/class/oplus_chg/usb/otg_switch "1"
 
 service modules_mount /system/bin/modules_mount.sh
     user root
