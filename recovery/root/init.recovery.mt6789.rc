@@ -91,6 +91,12 @@ service soter_hal /vendor/bin/hw/vendor.trustonic.soter@1.0-service
     interface aidl vendor.trustonic.hardware.soter.ITrustonicSoter/default
     seclabel u:r:recovery:s0
 
+service hal_cryptoeng_oppo /odm/bin/hw/vendor.oplus.hardware.cryptoeng@1.0-service
+    user root
+    group root input sdcard_rw sdcard_r
+    disabled
+    seclabel u:r:recovery:s0
+
 service gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-service
     interface android.hardware.gatekeeper@1.0::IGatekeeper default
     user root
@@ -120,27 +126,32 @@ on property:crypto.ready=1
     start vendor.keymint-trustonic
 
 on property:hwservicemanager.ready=true
+    start hal_cryptoeng_oppo
     start mobicore
     start gatekeeper-1-0
     start vendor.keymint-trustonic
 
 on property:ro.crypto.state=unsupported
     stop mobicore
+    stop hal_cryptoeng_oppo
     stop gatekeeper-1-0
     stop vendor.keymint-trustonic
 
 on property:ro.crypto.state=unencrypted
     stop mobicore
+    stop hal_cryptoeng_oppo
     stop gatekeeper-1-0
     stop vendor.keymint-trustonic
 
 on property:twrp.decrypt.done=true
     stop mobicore
+    stop hal_cryptoeng_oppo
     stop gatekeeper-1-0
     stop vendor.keymint-trustonic
 
 on property:crypto.ready=0
     stop mobicore
+    stop hal_cryptoeng_oppo
     stop gatekeeper-1-0
     stop vendor.keymint-trustonic
 
