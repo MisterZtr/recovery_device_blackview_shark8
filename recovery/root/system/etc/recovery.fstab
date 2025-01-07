@@ -45,11 +45,6 @@ my_manifest    /my_manifest    erofs ro wait,slotselect,logical,first_stage_moun
 /dev/block/by-name/userdata        /data            f2fs noatime,nosuid,nodev,discard,noflush_merge,fsync_mode=nobarrier,reserve_root=134217,resgid=1065,inlinecrypt wait,check,formattable,quota,latemount,reservedsize=128m,checkpoint=fs,fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,keydirectory=/metadata/vold/metadata_encryption,fsverity
 /dev/block/by-name/metadata        /metadata        ext4 noatime,nosuid,nodev,discard wait,check,formattable,first_stage_mount
 
-/dev/block/by-name/protect1        /mnt/vendor/protect_f ext4 noatime,nosuid,nodev,noauto_da_alloc,commit=1,nodelalloc wait,check
-/dev/block/by-name/protect2        /mnt/vendor/protect_s ext4 noatime,nosuid,nodev,noauto_da_alloc,commit=1,nodelalloc wait,check
-/dev/block/by-name/nvdata          /mnt/vendor/nvdata    ext4 noatime,nosuid,nodev,noauto_da_alloc,discard wait,check
-/dev/block/by-name/nvcfg           /mnt/vendor/nvcfg     ext4 noatime,nosuid,nodev,noauto_da_alloc,commit=1,nodelalloc wait,check
-
 /dev/block/by-name/frp       /persistent  emmc defaults defaults
 /dev/block/by-name/nvram     /nvram       emmc defaults defaults
 /dev/block/by-name/proinfo   /proinfo     emmc defaults defaults

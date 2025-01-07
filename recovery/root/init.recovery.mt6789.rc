@@ -175,3 +175,10 @@ service modules_mount /system/bin/modules_mount.sh
 
 on property:twrp.decrypt.done=true
     start modules_mount
+
+#OTG
+on property:ro.twrp.fastbootd=0
+    write /sys/class/oplus_chg/usb/otg_switch "1"
+
+on property:ro.twrp.fastbootd=1
+    write /sys/class/oplus_chg/usb/otg_switch "0"
