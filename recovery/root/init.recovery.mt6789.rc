@@ -9,8 +9,11 @@ on early-init
 on init
     # Create a more standard /dev/block layout for our scripts
     symlink /dev/block/platform/bootdevice /dev/block/bootdevice
-    mkdir /mnt/vendor/persist 0700 root root
-    mount ext4 /dev/block/by-name/persist /mnt/vendor/persist
+    mkdir /mnt/vendor/persist 0771 system system
+    chown system system /mnt/vendor/persist
+    chmod 0771 /mnt/vendor/persist
+    restorecon /mnt/vendor/persist
+    mount ext4 /dev/block/by-name/persist /mnt/vendor/persist rw
     mkdir /mnt/vendor/persist/OFRP
     export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw
     setprop sys.usb.configfs 1
