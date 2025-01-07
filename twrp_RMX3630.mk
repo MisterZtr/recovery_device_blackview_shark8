@@ -34,8 +34,15 @@ $(call inherit-product, vendor/twrp/config/common.mk)
 
 
 ## Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := $(PRODUCT_RELEASE_NAME)
+PRODUCT_DEVICE := RMX3630
 PRODUCT_NAME := twrp_$(PRODUCT_RELEASE_NAME)
 PRODUCT_BRAND := realme
 PRODUCT_MODEL := RMX3630
 PRODUCT_MANUFACTURER := realme
+
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    TARGET_DEVICE="RE8DDCL1" \
+    PRODUCT_DEVICE="RE8DDCL1"
+
+
+BUILD_FINGERPRINT := realme/RMX3630/RE8DDCL1:14/UKQ1.230924.001/S.1adf3b7-1:user/release-keys
