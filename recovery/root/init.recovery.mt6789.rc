@@ -14,7 +14,8 @@ on init
     chmod 0771 /mnt/vendor/persist
     restorecon /mnt/vendor/persist
     mount ext4 /dev/block/by-name/persist /mnt/vendor/persist rw
-    mkdir /mnt/vendor/persist/OFRP
+    mount ext4 /dev/block/by-name/persist /persist rw
+    mkdir /persist/OFRPFox
     export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw
     setprop sys.usb.configfs 1
     setprop sys.usb.controller "musb-hdrc"

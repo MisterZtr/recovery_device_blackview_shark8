@@ -42,7 +42,7 @@ my_manifest    /my_manifest    erofs ro wait,slotselect,logical,first_stage_moun
 /dev/block/by-name/vbmeta_system   /vbmeta_system   emmc defaults first_stage_mount,nofail,slotselect,avb=vbmeta
 # 130 "vendor/mediatek/proprietary/hardware/fstab/mt6779/fstab.in"
 /dev/block/by-name/oplusreserve2   /cache           ext4 noatime,nosuid,nodev,noauto_da_alloc,discard wait,check,formattable,first_stage_mount
-/dev/block/by-name/userdata        /data            f2fs noatime,nosuid,nodev,discard,noflush_merge,fsync_mode=nobarrier,reserve_root=134217,resgid=1065,inlinecrypt wait,check,formattable,quota,latemount,reservedsize=128m,checkpoint=fs,fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,keydirectory=/metadata/vold/metadata_encryption,fsverity
+/dev/block/by-name/userdata        /data            f2fs noatime,nosuid,nodev,discard,noflush_merge,fsync_mode=nobarrier,reserve_root=134217,resgid=1065,inlinecrypt wait,check,formattable,quota,latemount,resize,reservedsize=128m,checkpoint=fs,fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,keydirectory=/metadata/vold/metadata_encryption,fsverity
 /dev/block/by-name/metadata        /metadata        ext4 noatime,nosuid,nodev,discard wait,check,formattable,first_stage_mount
 
 /dev/block/by-name/frp       /persistent  emmc defaults defaults
@@ -88,4 +88,3 @@ my_manifest    /my_manifest    erofs ro wait,slotselect,logical,first_stage_moun
 
 #Yang.Li@PSW.AD.Recovery.1122242, 2018/03/22, Add for critical log in mtk platform
 /dev/block/by-name/reserve2            /reserve2       emmc    defaults                                                      defaults
-/dev/block/by-name/oplusreserve2       /opporeserve    ext4    rw,seclabel,nosuid,nodev,noatime,data=ordered                 wait
