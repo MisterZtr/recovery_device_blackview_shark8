@@ -1,6 +1,5 @@
 import /trustonic.rc
 import /tee.rc
-import /vold.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
@@ -38,10 +37,6 @@ on init
     chown system system /sys/class/leds/torch-light0/trigger
     chown system system /sys/class/leds/torch-light0/brightness
     chown system system /sys/class/leds/torch-light0/max_brightness
-
-on early-fs
-    # Once metadata has been mounted, we'll need vold to deal with userdata checkpointing
-    start vold
 
 on fs
 on property:ro.crypto.state=encrypted && property:ro.crypto.type=file
@@ -89,19 +84,6 @@ service mtk.plpath.utils.link /system/bin/mtk_plpath_utils
     oneshot
     seclabel u:r:recovery:s0
 
-service soter_hal /vendor/bin/hw/vendor.trustonic.soter@1.0-service
-    class late_start
-    user system
-    group system
-    interface aidl vendor.trustonic.hardware.soter.ITrustonicSoter/default
-    seclabel u:r:recovery:s0
-
-service hal_cryptoeng_oppo /odm/bin/hw/vendor.oplus.hardware.cryptoeng@1.0-service
-    user root
-    group root input sdcard_rw sdcard_r
-    disabled
-    seclabel u:r:recovery:s0
-
 service gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-service
     interface android.hardware.gatekeeper@1.0::IGatekeeper default
     user root
@@ -131,32 +113,27 @@ on property:crypto.ready=1
     start vendor.keymint-trustonic
 
 on property:hwservicemanager.ready=true
-    start hal_cryptoeng_oppo
     start mobicore
     start gatekeeper-1-0
     start vendor.keymint-trustonic
 
 on property:ro.crypto.state=unsupported
     stop mobicore
-    stop hal_cryptoeng_oppo
     stop gatekeeper-1-0
     stop vendor.keymint-trustonic
 
 on property:ro.crypto.state=unencrypted
     stop mobicore
-    stop hal_cryptoeng_oppo
     stop gatekeeper-1-0
     stop vendor.keymint-trustonic
 
 on property:twrp.decrypt.done=true
     stop mobicore
-    stop hal_cryptoeng_oppo
     stop gatekeeper-1-0
     stop vendor.keymint-trustonic
 
 on property:crypto.ready=0
     stop mobicore
-    stop hal_cryptoeng_oppo
     stop gatekeeper-1-0
     stop vendor.keymint-trustonic
 
