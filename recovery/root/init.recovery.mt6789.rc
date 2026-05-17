@@ -1,4 +1,4 @@
-import /init.microtrust.rc
+import /vendor/etc/init/trustkernel.rc
 
 on init
     # Create a more standard /dev/block layout for our scripts
@@ -65,27 +65,22 @@ on property:sys.usb.ffs.ready=1
     start mountfix
 
 on property:hwservicemanager.ready=true
-    start teei_daemon
     start vendor.gatekeeper-1-0
     start vendor.keymint-trustkernel
 
 on property:vendor.sys.listener.registered=true
-    start teei_daemon
     start vendor.gatekeeper-1-0
     start vendor.keymint-trustkernel
    
 on property:ro.crypto.state=unsupported
-    stop teei_daemon
     stop vendor.keymint-trustkernel
     stop vendor.gatekeeper-1-0
 
 on property:ro.crypto.state=unencrypted
-    stop teei_daemon
     stop vendor.keymint-trustkernel
     stop vendor.gatekeeper-1-0
     
 on property:twrp.all.users.decrypted=true
-    stop teei_daemon
     stop vendor.keymint-trustkernel
     stop vendor.gatekeeper-1-0
 
