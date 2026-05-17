@@ -15,15 +15,6 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 ENABLE_VIRTUAL_AB := true
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch_with_vendor_ramdisk.mk)
 
-# Bootctrl
-PRODUCT_PACKAGES += \
-    android.hardware.boot@1.2-mtkimpl \
-    android.hardware.boot@1.2-mtkimpl.recovery \
-    bootctrl
-
-#PRODUCT_PACKAGES_DEBUG += \
- #   bootctrl
-
 # Fastbootd
 PRODUCT_PACKAGES += \
     fastbootd \
