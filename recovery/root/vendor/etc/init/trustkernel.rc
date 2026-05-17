@@ -64,7 +64,7 @@ service teed /vendor/bin/teed \
     --prebuilt /vendor/app/t6/data \
     --logpath /data/vendor/t6/tkcore.log \
     --proprefix vendor.trustkernel
-	capabilities SYS_RAWIO
+	capabilities SETUID SETGID SYS_RAWIO SYS_ADMIN DAC_OVERRIDE CHOWN
 	user root
 	group root
 	class core
