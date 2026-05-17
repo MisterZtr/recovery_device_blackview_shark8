@@ -1,12 +1,18 @@
-import /init.microtrust.rc
-
 on init
     # Create a more standard /dev/block layout for our scripts
     symlink /dev/block/platform/bootdevice /dev/block/bootdevice
-    mkdir /persist 0700 root root
-    mount ext4 /dev/block/by-name/persist /persist
-    mkdir /persist/OFRP
+    mkdir /mnt/vendor/persist 0775 shell system
+    chown system system /mnt/vendor/persist
+    chmod 0771 /mnt/vendor/persist
+    restorecon /mnt/vendor/persist
+    mount ext4 /dev/block/by-name/persist /mnt/vendor/persist rw
+    mount ext4 /dev/block/by-name/persist /persist rw
     export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw
+    mkdir /data/vendor 0771 system system
+    mkdir /data/vendor/t6 0771 system system
+    mount tmpfs tmpfs /data/vendor/t6 mode=0771,uid=1000,gid=1000
+    mkdir /data/vendor/t6/app 0771 system system
+    mkdir /data/vendor/t6/fs 0771 system system
     setprop sys.usb.configfs 1
     setprop sys.usb.controller "musb-hdrc"
     setprop sys.usb.ffs.aio_compat 1
@@ -106,8 +112,20 @@ on early-fs
     start vold
 
 on fs
-    write /proc/bootprof "INIT:fs"
     install_keyring
+    wait /dev/block/platform/soc/11270000.ufshci
+    symlink /dev/block/platform/soc/11270000.ufshci /dev/block/bootdevice
+    mkdir /mnt/vendor/protect_f 0770 system system
+    mkdir /mnt/vendor/protect_s 0770 system system
+    mkdir /mnt/vendor/nvdata    0771 system system
+    mkdir /mnt/vendor/nvcfg     0771 system system
+    mount ext4 /dev/block/by-name/protect1 /mnt/vendor/protect_f rw wait
+    mount ext4 /dev/block/by-name/protect2 /mnt/vendor/protect_s rw wait
+    mount ext4 /dev/block/by-name/nvdata   /mnt/vendor/nvdata    rw wait
+    mount ext4 /dev/block/by-name/nvcfg    /mnt/vendor/nvcfg     rw wait
+    mkdir /mnt/vendor/persist/t6_rec    0755 system system
+    mkdir /mnt/vendor/protect_f/tee_rec 0755 system system
+    exec u:r:recovery:s0 system -- /vendor/bin/teed-init.sh
 
 # mount fstab
     write /proc/bootprof "INIT:Mount_START"
@@ -118,6 +136,7 @@ on fs
     write /proc/bootprof "INIT:Mount_END"
 
 on post-fs
+    mkdir /data/vendor/key_provisioning 0771 system system
     start vendor.boot-hal-1-2
 
 service vendor.vibrator-default /vendor/bin/hw/android.hardware.vibrator-service.mediatek
@@ -136,30 +155,36 @@ service mountfix /sbin/sh /system/bin/mount.sh
 on property:sys.usb.ffs.ready=1
     start mountfix
 
+on property:ro.crypto.state=encrypted && property:ro.crypto.type=file
+    write /proc/bootprof "crypto: install_keyring (crypto.ready=1)"
+    setprop crypto.ready 1
+
+on property:crypto.ready=1
+    write /proc/bootprof "crypto: start vendor.keymint"
+    start vendor.keymint-trustkernel
+
 on property:hwservicemanager.ready=true
-    start teei_daemon
     start vendor.gatekeeper-1-0
     start vendor.keymint-trustkernel
 
 on property:vendor.sys.listener.registered=true
-    start teei_daemon
     start vendor.gatekeeper-1-0
     start vendor.keymint-trustkernel
    
 on property:ro.crypto.state=unsupported
-    stop teei_daemon
     stop vendor.keymint-trustkernel
     stop vendor.gatekeeper-1-0
+    stop teed
 
 on property:ro.crypto.state=unencrypted
-    stop teei_daemon
     stop vendor.keymint-trustkernel
     stop vendor.gatekeeper-1-0
+    stop teed
     
 on property:twrp.all.users.decrypted=true
-    stop teei_daemon
     stop vendor.keymint-trustkernel
     stop vendor.gatekeeper-1-0
+    stop teed
 
 on boot
     start health-hal-2-1
