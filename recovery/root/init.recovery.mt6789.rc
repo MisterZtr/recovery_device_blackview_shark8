@@ -140,31 +140,26 @@ on property:hwservicemanager.ready=true
     start teei_daemon
     start vendor.gatekeeper-1-0
     start vendor.keymint-trustkernel
-    start keymaster
 
 on property:vendor.sys.listener.registered=true
     start teei_daemon
     start vendor.gatekeeper-1-0
     start vendor.keymint-trustkernel
-    start keymaster
    
 on property:ro.crypto.state=unsupported
     stop teei_daemon
     stop vendor.keymint-trustkernel
     stop vendor.gatekeeper-1-0
-    stop keymaster-4-1
 
 on property:ro.crypto.state=unencrypted
     stop teei_daemon
     stop vendor.keymint-trustkernel
     stop vendor.gatekeeper-1-0
-    stop keymaster
     
 on property:twrp.all.users.decrypted=true
     stop teei_daemon
     stop vendor.keymint-trustkernel
     stop vendor.gatekeeper-1-0
-    stop keymaster
 
 on boot
     start health-hal-2-1
