@@ -32,12 +32,8 @@
 /protect_s          ext4   /dev/block/by-name/protect2                     flags=display="Protect_s";backup=1
 
 # Images
-/system_image       emmc   /dev/block/mapper/system                        flags=backup=1;display="System Image";slotselect;flashimg=1
-/system_ext_image   emmc   /dev/block/mapper/system_ext                    flags=backup=1;display="System_ext Image";slotselect;flashimg=1
-/vendor_image       emmc   /dev/block/mapper/vendor                        flags=backup=1;display="Vendor Image";slotselect;flashimg=1
-/vendor_dlkm_image  emmc   /dev/block/mapper/vendor_dlkm                   flags=backup=1;display="VendorDLKM Image";slotselect;flashimg=1
-/product_image      emmc   /dev/block/mapper/product                       flags=backup=1;display="Product Image";slotselect;flashimg=1
-/odm_dlkm_image     emmc   /dev/block/mapper/odm_dlkm                      flags=backup=1;display="OdmDLKM Image";slotselect;flashimg=1
+/system_image       emmc   /dev/block/by-name/system                       flags=backup=1;display="System Image";slotselect;flashimg=1
+/vendor_image       emmc   /dev/block/by-name/vendor                       flags=backup=1;display="Vendor Image";slotselect;flashimg=1
 
 # Removable Storage
 /external_sd        auto   /dev/block/mmcblk1p1 /dev/block/mmcblk0p1       flags=display="External_SDcard";storage;wipeingui;removable
