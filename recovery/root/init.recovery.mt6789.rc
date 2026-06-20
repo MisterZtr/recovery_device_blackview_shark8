@@ -127,14 +127,6 @@ on fs
     mkdir /mnt/vendor/protect_f/tee_rec 0755 system system
     exec u:r:recovery:s0 system -- /vendor/bin/teed-init.sh
 
-# mount fstab
-    write /proc/bootprof "INIT:Mount_START"
-    write /sys/kernel/tracing/trace_marker "B|1|Mount"
-    mount_all --early
-    exec /system/bin/tune2fs -O has_journal -u 10010 -r 4096 /dev/block/by-name/userdata
-    write /sys/kernel/tracing/trace_marker "E"
-    write /proc/bootprof "INIT:Mount_END"
-
 on post-fs
     mkdir /data/vendor/key_provisioning 0771 system system
     start vendor.boot-hal-1-2
@@ -144,16 +136,6 @@ service vendor.vibrator-default /vendor/bin/hw/android.hardware.vibrator-service
     user root
     group root system
     seclabel u:r:recovery:s0
-
-service mountfix /sbin/sh /system/bin/mount.sh
-    user root
-    group root
-    oneshot
-    disabled
-    seclabel u:r:recovery:s0
-    
-on property:sys.usb.ffs.ready=1
-    start mountfix
 
 on property:ro.crypto.state=encrypted && property:ro.crypto.type=file
     write /proc/bootprof "crypto: install_keyring (crypto.ready=1)"
@@ -190,13 +172,3 @@ on boot
     start health-hal-2-1
     start vendor.vibrator-default
     setprop sys.usb.config adb
-
-service modules_mount /system/bin/modules_mount.sh
-    user root
-    group root
-    disabled
-    oneshot
-    seclabel u:r:recovery:s0
-
-on property:twrp.decrypt.done=true
-    start modules_mount
