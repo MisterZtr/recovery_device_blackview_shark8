@@ -47,7 +47,6 @@ OF_FL_PATH2=/sys/class/leds/torch-light0
 # OTA
 OF_DISABLE_OTA_MENU := 1
 OF_NO_TREBLE_COMPATIBILITY_CHECK := 1
-OF_SUPPORT_VBMETA_AVB2_PATCHING := 1
 
 # Maintainer specific settings
 OF_MAINTAINER := MisterZtr
