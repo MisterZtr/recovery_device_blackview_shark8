@@ -36,5 +36,6 @@
 /vendor_image       emmc   /dev/block/by-name/vendor                       flags=backup=1;display="Vendor Image";slotselect;flashimg=1
 
 # Removable Storage
+/storage            auto   /data/media/0                                   flags=display="Internal Storage";backup=1;usermrf;fsflags="bind,utf8";removable
 /external_sd        auto   /dev/block/mmcblk1p1 /dev/block/mmcblk0p1       flags=display="External_SDcard";storage;wipeingui;removable
 /usb_otg            auto   /dev/block/sda1 /dev/block/sda /dev/block/sdd1  flags=storage;wipeingui;removable
