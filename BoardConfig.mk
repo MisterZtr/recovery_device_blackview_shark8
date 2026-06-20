@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-DEVICE_PATH := device/blackview/shark8
+DEVICE_PATH := device/blackview/Shark8
 
 # For building with minimal manifest
 ALLOW_MISSING_DEPENDENCIES := true
@@ -41,10 +41,10 @@ ENABLE_CPUSETS := true
 ENABLE_SCHEDBOOST := true
 
 # Assertation
-TARGET_OTA_ASSERT_DEVICE := shark8
+TARGET_OTA_ASSERT_DEVICE := Shark8
 
 # Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := shark8
+TARGET_BOOTLOADER_BOARD_NAME := Shark8
 TARGET_NO_BOOTLOADER := true
 TARGET_USES_UEFI := true
 

@@ -17,7 +17,7 @@
 #
 # 	Please maintain this if you use this script or any part of it
 #
-FDEVICE="shark8"
+FDEVICE="Shark8"
 #set -o xtrace
 
 fox_get_target_device() {
@@ -39,7 +39,7 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
  	export ALLOW_MISSING_DEPENDENCIES=true
 
  	#OFR build settings & info
-	export TARGET_DEVICE_ALT="shark8"
+	export TARGET_DEVICE_ALT="Shark8"
 	export FOX_RECOVERY_SYSTEM_PARTITION="/dev/block/mapper/system"
 	export FOX_RECOVERY_VENDOR_PARTITION="/dev/block/mapper/vendor"
     export FOX_VENDOR_BOOT_RECOVERY_FULL_REFLASH=1

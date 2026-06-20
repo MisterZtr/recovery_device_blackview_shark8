@@ -18,7 +18,7 @@
 #
 
 # Define hardware platform
-PRODUCT_RELEASE_NAME := shark8
+PRODUCT_RELEASE_NAME := Shark8
 
 # Device path for OEM device tree
 DEVICE_PATH := device/blackview/$(PRODUCT_RELEASE_NAME)
@@ -36,6 +36,6 @@ $(call inherit-product, vendor/twrp/config/common.mk)
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := $(PRODUCT_RELEASE_NAME)
 PRODUCT_NAME := twrp_$(PRODUCT_RELEASE_NAME)
-PRODUCT_BRAND := blackview
-PRODUCT_MODEL := SHARK8
-PRODUCT_MANUFACTURER := blackview
+PRODUCT_BRAND := Blackview
+PRODUCT_MODEL := SHARK 8
+PRODUCT_MANUFACTURER := Blackview

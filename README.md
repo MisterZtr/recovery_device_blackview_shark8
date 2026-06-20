@@ -41,12 +41,12 @@ Works:
 # Building
 ```bash
 source build/envsetup.sh
-lunch twrp_shark8-eng
+lunch twrp_Shark8-eng
 mka vendorbootimage
 ```
 
 ## To use it:
 
 ```
-fastboot flash vendor_boot out/target/product/shark8/vendor_boot.img
+fastboot flash vendor_boot out/target/product/Shark8/vendor_boot.img
 ```
