@@ -144,6 +144,8 @@ alias of:N*T*Cmediatek,mt6895-spmi spmi_mtk_pmif
 alias of:N*T*Cmediatek,mt6895-spmiC* spmi_mtk_pmif
 alias of:N*T*Cmediatek,mt6983-spmi spmi_mtk_pmif
 alias of:N*T*Cmediatek,mt6983-spmiC* spmi_mtk_pmif
+alias of:N*T*Csamsung,ana6705,cmd,fhdp panel_samsung_ana6705_cmd_fhdp
+alias of:N*T*Csamsung,ana6705,cmd,fhdpC* panel_samsung_ana6705_cmd_fhdp
 alias i2c:rt1711h tcpc_rt1711h
 alias i2c:rt1715 tcpc_rt1711h
 alias i2c:rt1716 tcpc_rt1711h
@@ -185,6 +187,8 @@ alias of:N*T*Cmediatek,mt6761-disp-pwm pwm_mtk_disp
 alias of:N*T*Cmediatek,mt6761-disp-pwmC* pwm_mtk_disp
 alias of:N*T*Cmediatek,mt6739-disp-pwm pwm_mtk_disp
 alias of:N*T*Cmediatek,mt6739-disp-pwmC* pwm_mtk_disp
+alias of:N*T*Cmediatek,mt6885-disp-pwm pwm_mtk_disp
+alias of:N*T*Cmediatek,mt6885-disp-pwmC* pwm_mtk_disp
 alias of:N*T*Cft8725,vdo-m9903 panel_truly_ft8725_vdo_m9903
 alias of:N*T*Cft8725,vdo-m9903C* panel_truly_ft8725_vdo_m9903
 alias of:N*T*Cmediatek,mt6357-dynamic_loading_throttling mtk_dynamic_loading_throttling
@@ -236,6 +240,8 @@ alias of:N*T*Cmediatek,extcon-usb extcon_mtk_usb
 alias of:N*T*Cmediatek,extcon-usbC* extcon_mtk_usb
 alias of:N*T*Cmediatek,usb_meta meta
 alias of:N*T*Cmediatek,usb_metaC* meta
+alias of:N*T*Cmediatek,mt6363-lvsys-notify pmic_lvsys_notify
+alias of:N*T*Cmediatek,mt6363-lvsys-notifyC* pmic_lvsys_notify
 alias spmi:spmi-pmic mtk_spmi_pmic
 alias of:N*T*Cmediatek,mt6315 mtk_spmi_pmic
 alias of:N*T*Cmediatek,mt6315C* mtk_spmi_pmic
@@ -251,6 +257,8 @@ alias of:N*T*Cmediatek,mt6373 mtk_spmi_pmic
 alias of:N*T*Cmediatek,mt6373C* mtk_spmi_pmic
 alias of:N*T*Cmediatek,scpsys-disable-unused mtk_pm_domain_disable_unused
 alias of:N*T*Cmediatek,scpsys-disable-unusedC* mtk_pm_domain_disable_unused
+alias of:N*T*Ctianma,r66451,cmd,120hz panel_tianma_r66451_cmd_120hz
+alias of:N*T*Ctianma,r66451,cmd,120hzC* panel_tianma_r66451_cmd_120hz
 alias of:N*T*Cmediatek,pbm mtk_pbm
 alias of:N*T*Cmediatek,pbmC* mtk_pbm
 alias of:N*T*Cmediatek,disp-leds leds_mtk_disp
@@ -316,6 +324,8 @@ alias of:N*T*Cmediatek,mt2712-uart-dma mtk_uart_apdma
 alias of:N*T*Cmediatek,mt2712-uart-dmaC* mtk_uart_apdma
 alias of:N*T*Cmediatek,mt6779-uart-dma mtk_uart_apdma
 alias of:N*T*Cmediatek,mt6779-uart-dmaC* mtk_uart_apdma
+alias of:N*T*Cnt37801,cmd,fhd,10bit panel_nt37801_cmd_fhd_10bit
+alias of:N*T*Cnt37801,cmd,fhd,10bitC* panel_nt37801_cmd_fhd_10bit
 alias of:N*T*Cmediatek,mt6765-cqdma mtk_cqdma
 alias of:N*T*Cmediatek,mt6765-cqdmaC* mtk_cqdma
 alias of:N*T*Cmediatek,charger,pe mtk_pep
@@ -714,6 +724,10 @@ alias of:N*T*Cmediatek,mt6895-dp-intf mediatek_drm
 alias of:N*T*Cmediatek,mt6895-dp-intfC* mediatek_drm
 alias of:N*T*Cmediatek,mt8183-ufsphy phy_mtk_ufs
 alias of:N*T*Cmediatek,mt8183-ufsphyC* phy_mtk_ufs
+alias of:N*T*Ctruly,td4330,cmd panel_truly_td4330_cmd
+alias of:N*T*Ctruly,td4330,cmdC* panel_truly_td4330_cmd
+alias of:N*T*Cjdi,nt36672e,cphy,vdo panel_alpha_jdi_nt36672e_cphy_vdo
+alias of:N*T*Cjdi,nt36672e,cphy,vdoC* panel_alpha_jdi_nt36672e_cphy_vdo
 alias of:N*T*Cmediatek,clk-disable-unused clk_disable_unused
 alias of:N*T*Cmediatek,clk-disable-unusedC* clk_disable_unused
 alias of:N*T*Cmediatek,devinfo nvmem_mtk_devinfo
@@ -782,6 +796,8 @@ alias of:N*T*Carm,sec-rng sec_rng
 alias of:N*T*Carm,sec-rngC* sec_rng
 alias of:N*T*Cmediatek,pd_adapter mtk_pd_adapter
 alias of:N*T*Cmediatek,pd_adapterC* mtk_pd_adapter
+alias of:N*T*Cjdi,nt36672e,vdo,120hz,hfp panel_alpha_jdi_nt36672e_vdo_120hz_hfp
+alias of:N*T*Cjdi,nt36672e,vdo,120hz,hfpC* panel_alpha_jdi_nt36672e_vdo_120hz_hfp
 alias net-pf-16-proto-16-family-nl80211 cfg80211
 alias of:N*T*Cmediatek,charger,pe4 mtk_pep40
 alias of:N*T*Cmediatek,charger,pe4C* mtk_pep40
@@ -826,6 +842,8 @@ alias of:N*T*Cmediatek,mt6779-mmc mtk_mmc
 alias of:N*T*Cmediatek,mt6779-mmcC* mtk_mmc
 alias of:N*T*Cmediatek,mt6765-mmc mtk_mmc
 alias of:N*T*Cmediatek,mt6765-mmcC* mtk_mmc
+alias of:N*T*Cmediatek,mt6761-mmc mtk_mmc
+alias of:N*T*Cmediatek,mt6761-mmcC* mtk_mmc
 alias of:N*T*Cmediatek,mt6768-mmc mtk_mmc
 alias of:N*T*Cmediatek,mt6768-mmcC* mtk_mmc
 alias of:N*T*Cmediatek,mt6789-mmc mtk_mmc
