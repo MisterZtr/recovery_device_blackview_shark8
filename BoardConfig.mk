@@ -185,5 +185,7 @@ TW_LOAD_PREBUILT_MODULES := true
 # Apex
 TW_EXCLUDE_APEX=true
 
+BOARD_SEPOLICY_DIRS += device/blackview/Shark8/sepolicy
+
 # Maintainer specific settings
 #TW_DEVICE_VERSION := Kychera22
