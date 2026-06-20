@@ -1,4 +1,4 @@
-#  Recovery tree of Blackview SHARK 8
+# TrustKernel A14 Recovery tree of Blackview SHARK 8
 
 It was announced & released on November 2023.
 
@@ -16,17 +16,12 @@ Battery | Li-Po 5000 mAh, non-removable
 Display | 6.78-inch, 1080*2460 FHD+ Resolution; Dynamic 120Hz Refresh Rate
 Camera  | 64 MP (Samsung® ISOCELL GW3) and 13 MP (Samsung® ISOCELL 3L6)
 
-## Device picture
-
-![1](https://github.com/MisterZtr/recovery_device_blackview_shark8/assets/87061244/df8851e4-afea-4709-a89c-5b044ff9bd07)
-
-
 ## Features
 
 Works:
 
 - [X] ADB
-- [ ] Trust Kernel Decryption
+- [X] Trust Kernel Decryption
 - [X] Display
 - [X] Fasbootd
 - [X] Flashing
@@ -35,13 +30,14 @@ Works:
 - [X] USB OTG
 - [X] SD Card
 - [X] Touch
-- [ ] Flashlight
 - [X] Vibrator
+- [X] Format DATA
+- [ ] Flashlight
 
 # Building
 ```bash
-source build/envsetup.sh
-lunch twrp_Shark8-eng
+. build/envsetup.sh
+breakfast twrp_Shark8-ap2a-eng
 mka vendorbootimage
 ```
 
