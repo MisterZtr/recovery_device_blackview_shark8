@@ -35,16 +35,17 @@ AB_OTA_UPDATER := true
 # A/B
 AB_OTA_PARTITIONS += \
     boot \
+    vendor_boot \
     dtbo \
-    product \
     system \
     system_ext \
-    mi_ext \
+    product \
+    vendor \
+    vendor_dlkm \
+    odm_dlkm \
     vbmeta \
     vbmeta_system \
-    vbmeta_vendor \
-    vendor \
-    vendor_boot
+    vbmeta_vendor
     
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
